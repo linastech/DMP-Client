@@ -1,0 +1,11 @@
+{
+  "name": "DMP",
+  "version": "0.0.1",
+  "description": "None",
+  "main": "index.js",
+  "author": "Linas Rakauskas",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
