@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="43" height="43" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #2914c6;
+        stroke-linejoin: round;
+        stroke-opacity: 0.74;
+        stroke-width: 10px;
+        filter: url(#filter);
+      }
+
+      .cls-2 {
+        font-size: 300px;
+        fill: #fff;
+        text-anchor: middle;
+        font-family: "Franklin Gothic Heavy";
+      }
+    </style>
+    <filter id="filter" x="0" y="0" width="1000" height="1000" filterUnits="userSpaceOnUse">
+      <feFlood result="flood"/>
+      <feComposite result="composite" operator="in" in2="SourceGraphic"/>
+      <feBlend result="blend" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g style="fill: ; filter: url(#filter)">
+    <circle id="circle" class="cls-1" cx="500" cy="500" r="500" style="stroke: inherit; filter: none; fill: inherit"/>
+  </g>
+  <use xlink:href="#circle" style="stroke: #2914c6; filter: none; fill: none"/>
+  <text id="DMP" class="cls-2" transform="translate(513 634.962) scale(1.353)"><tspan x="0">DMP</tspan></text>
+</svg>
