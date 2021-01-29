@@ -1,23 +1,24 @@
-import React from 'react';
-import Link from 'next/link';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import {
-  AppBar,
-  Toolbar,
-  makeStyles
-} from '@material-ui/core';
-import Logo from '@components/Logo/Index';
+import { AppBar, Box, Toolbar, makeStyles } from '@material-ui/core'
+import Link from 'next/link'
+import Logo from '@components/Logo/Index'
+import PropTypes from 'prop-types'
+import React from 'react'
+import clsx from 'clsx'
+import { useSession } from 'next-auth/client'
 
-const useStyles = makeStyles(({
+const useStyles = makeStyles({
   root: {},
   toolbar: {
     height: 64
   }
-}));
+})
 
-const TopBar = ({ className, ...rest }) => {
-  const classes = useStyles();
+export default function TopBar({ className, ...rest }) {
+  const classes = useStyles()
+  const [
+    session,
+    loading
+  ] = useSession()
 
   return (
     <AppBar
@@ -26,16 +27,23 @@ const TopBar = ({ className, ...rest }) => {
       {...rest}
     >
       <Toolbar className={classes.toolbar}>
-        <Link href="/">
-          <Logo />
-        </Link>
+        <Logo edge="start" />
+
+        <Box flexGrow={1} />
+
+        { typeof window !== 'undefined' && !loading && session &&
+          <Link href="/api/auth/signout">
+            <a>Logout</a>
+          </Link>}
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}
 
 TopBar.propTypes = {
   className: PropTypes.string
-};
+}
 
-export default TopBar;
+TopBar.defaultProps = {
+  className: 'topbar'
+}

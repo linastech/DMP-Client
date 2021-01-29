@@ -1,6 +1,7 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import TopBar from './TopBar';
+import PropTypes from 'prop-types'
+import React from 'react'
+import TopBar from './TopBar'
+import { makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,14 +27,15 @@ const useStyles = makeStyles((theme) => ({
     height: '100%',
     overflow: 'auto'
   }
-}));
+}))
 
-const Layout = ({children}) => {
-  const classes = useStyles();
+export default function Layout({ children }) {
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
       <TopBar />
+
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
@@ -42,7 +44,9 @@ const Layout = ({children}) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+}
