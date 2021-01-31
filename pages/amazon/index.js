@@ -12,20 +12,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Home({ user }) {
+export default function AmazonOrders({ user }) {
   const classes = useStyles()
 
   return (
     <Page
       className={classes.root}
-      title="Home"
+      title="Amazon Orders"
     >
       <Container maxWidth={false}>
         <Grid
           container
           spacing={3}
         >
-          Home
+          Amazon Orders
         </Grid>
       </Container>
     </Page>
@@ -50,10 +50,10 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-Home.propTypes = {
+AmazonOrders.propTypes = {
   user: PropTypes.object
 }
 
-Home.defaultProps = {
+AmazonOrders.defaultProps = {
   user: null
 }

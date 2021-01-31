@@ -12,20 +12,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function Home({ user }) {
+export default function Suppliers({ user }) {
   const classes = useStyles()
 
   return (
     <Page
       className={classes.root}
-      title="Home"
+      title="Suppliers"
     >
       <Container maxWidth={false}>
         <Grid
           container
           spacing={3}
         >
-          Home
+          Suppliers
         </Grid>
       </Container>
     </Page>
@@ -50,10 +50,10 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-Home.propTypes = {
+Suppliers.propTypes = {
   user: PropTypes.object
 }
 
-Home.defaultProps = {
+Suppliers.defaultProps = {
   user: null
 }
