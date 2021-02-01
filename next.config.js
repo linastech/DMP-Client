@@ -11,6 +11,7 @@ module.exports = {
     }
 
     config.resolve.alias['@components'] = path.join(__dirname, './components')
+    config.resolve.alias['@utils'] = path.join(__dirname, './utils')
 
     return config
   }

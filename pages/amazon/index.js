@@ -1,7 +1,11 @@
-import PropTypes from 'prop-types'
-import { Container, Grid, makeStyles } from '@material-ui/core'
+import React, { useState, useEffect } from 'react'
+import { Container, makeStyles, Box, Typography } from '@material-ui/core'
 import { getSession } from 'next-auth/client'
 import Page from '@components/Page'
+import Results from './Results'
+import Toolbar from './Toolbar'
+import Stats from './Stats'
+import useFetch from 'use-http'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,8 +16,30 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function AmazonOrders({ user }) {
+export default function AmazonOrders() {
   const classes = useStyles()
+  const [orders, setTodos] = useState([])
+
+  const { get, response, loading, error } = useFetch(process.env.NEXT_PUBLIC_API_URL)
+
+  async function initializeTodos() {
+    const initialTodos = await get('/orders/amazon')
+
+    if (response.ok) {
+      setTodos(initialTodos)
+    }
+  }
+
+  useEffect(() => { initializeTodos() }, [])
+
+  // TODO Indicators
+  if (error) {
+    return ('Error!')
+  }
+
+  if (loading) {
+    return ('Loading...')
+  }
 
   return (
     <Page
@@ -21,12 +47,22 @@ export default function AmazonOrders({ user }) {
       title="Amazon Orders"
     >
       <Container maxWidth={false}>
-        <Grid
-          container
-          spacing={3}
-        >
-          Amazon Orders
-        </Grid>
+        <Box>
+          <Typography
+            color="textPrimary"
+            variant="h4"
+          >
+            Amazon Orders
+          </Typography>
+        </Box>
+
+        <Stats />
+
+        <Toolbar />
+
+        <Box mt={3}>
+          <Results orders={orders} />
+        </Box>
       </Container>
     </Page>
   )
@@ -49,11 +85,6 @@ export async function getServerSideProps(ctx) {
     }
   }
 }
-
-AmazonOrders.propTypes = {
-  user: PropTypes.object
-}
-
 AmazonOrders.defaultProps = {
   user: null
 }
