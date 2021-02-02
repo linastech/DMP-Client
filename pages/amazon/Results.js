@@ -80,7 +80,7 @@ export default function Results({ orders, ...rest }) {
                   </TableCell>
 
                   <TableCell>
-                    <Link href="/orderd/1">
+                    <Link href="/order/1">
                       {order.orderNumber}
                     </Link>
                   </TableCell>
