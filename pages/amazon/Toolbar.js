@@ -5,13 +5,7 @@ import { Card, CardContent, TextField, InputAdornment, SvgIcon, makeStyles, Grid
 import { Search as SearchIcon } from 'react-feather'
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
-  importButton: {
-    marginRight: theme.spacing(1)
-  },
-  exportButton: {
-    marginRight: theme.spacing(1)
-  }
+  root: {}
 }))
 
 const suppliers = [
@@ -39,7 +33,6 @@ const markets = [
     label: 'Latvia'
   }
 ]
-
 
 export default function Toolbar({ className, ...rest }) {
   const classes = useStyles()
