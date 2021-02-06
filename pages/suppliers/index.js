@@ -1,5 +1,7 @@
-import { Container, Grid, makeStyles } from '@material-ui/core'
+import { Container, makeStyles } from '@material-ui/core'
 import Page from '@components/Page'
+import AddSupplier from './AddSupplier'
+import SuppliersList from './SupplierList'
 import checkAuth from '@utils/checkAuth'
 
 const useStyles = makeStyles((theme) => ({
@@ -19,13 +21,10 @@ export default function Suppliers({ user }) {
       className={classes.root}
       title="Suppliers"
     >
-      <Container maxWidth={false}>
-        <Grid
-          container
-          spacing={3}
-        >
-          Suppliers
-        </Grid>
+    <Container className={classes.root} maxWidth={false}>
+        <AddSupplier />
+
+        <SuppliersList />
       </Container>
     </Page>
   )
