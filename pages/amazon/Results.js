@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 import moment from 'moment'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Box, Card, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, makeStyles } from '@material-ui/core'
@@ -132,4 +132,6 @@ Results.propTypes = {
   orders: PropTypes.array.isRequired
 }
 
-
+Results.defaultProps = {
+  orders: []
+}

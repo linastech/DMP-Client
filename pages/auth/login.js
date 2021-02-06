@@ -1,8 +1,10 @@
 import * as Yup from 'yup'
 import { Box, Button, Container, TextField, Typography, makeStyles } from '@material-ui/core'
-import { getSession, signIn } from 'next-auth/client'
+import Layout from '@layouts/Layout'
+import { signIn } from 'next-auth/client'
 import { Formik } from 'formik'
 import Page from '@components/Page'
+import checkAuth from '@utils/checkAuth'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3)
   }
 }))
+
+LoginPage.Layout = Layout
 
 export default function LoginPage() {
   const classes = useStyles()
@@ -114,16 +118,4 @@ export default function LoginPage() {
   )
 }
 
-// eslint-disable-next-line func-style
-export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
-
-  if (session) {
-    ctx.res.writeHead(302, { Location: '/' })
-    ctx.res.end()
-
-    return {}
-  }
-
-  return { props: {} }
-}
+export const getServerSideProps = checkAuth()

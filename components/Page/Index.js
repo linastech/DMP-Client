@@ -6,7 +6,7 @@ const Page = forwardRef(({
   children,
   title = '',
   ...rest
-}, ref) => {
+}, ref) => (
   <div
     displayName="Page"
     ref={ref}
@@ -18,7 +18,7 @@ const Page = forwardRef(({
 
     {children}
   </div>
-})
+))
 
 Page.propTypes = {
   children: PropTypes.node.isRequired,

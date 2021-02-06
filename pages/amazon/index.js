@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Container, makeStyles, Box, Typography } from '@material-ui/core'
-import { getSession } from 'next-auth/client'
 import Page from '@components/Page'
 import Results from './Results'
 import Toolbar from './Toolbar'
 import Stats from './Stats'
 import useFetch from 'use-http'
+import checkAuth from '@utils/checkAuth'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,14 +15,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3)
   }
 }))
-
 export default function AmazonOrders() {
   const classes = useStyles()
   const [orders, setTodos] = useState([])
 
   const { get, response, loading, error } = useFetch(process.env.NEXT_PUBLIC_API_URL)
 
-  async function initializeTodos() {
+  async function initializeOrders() {
     const initialTodos = await get('/orders/amazon')
 
     if (response.ok) {
@@ -30,7 +29,7 @@ export default function AmazonOrders() {
     }
   }
 
-  useEffect(() => { initializeTodos() }, [])
+  useEffect(() => { initializeOrders() }, [])
 
   // TODO Indicators
   if (error) {
@@ -68,23 +67,4 @@ export default function AmazonOrders() {
   )
 }
 
-// eslint-disable-next-line func-style
-export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
-
-  if (!session) {
-    ctx.res.writeHead(302, { Location: '/auth/login' })
-    ctx.res.end()
-
-    return { props: {} }
-  }
-
-  return {
-    props: {
-      user: session.user
-    }
-  }
-}
-AmazonOrders.defaultProps = {
-  user: null
-}
+export const getServerSideProps = checkAuth()

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import NavBar from './NavBar'
-import TopBar from './TopBar'
+import NavBar from '@components/NavBar'
+import TopBar from '@components/TopBar'
 import { makeStyles } from '@material-ui/core'
 import { useSession } from 'next-auth/client'
 

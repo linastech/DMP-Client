@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { makeStyles, Container } from '@material-ui/core'
-import { getSession } from 'next-auth/client'
+import React from 'react'
+import { makeStyles } from '@material-ui/core'
 import Page from '@components/Page'
 import OrderInfo from './OrderInfo'
 import OrderedItems from './OrderedItems'
 import OrderHistory from './OrderHistory'
 import EditInfo from './EditInfo'
+import checkAuth from '@utils/checkAuth'
 
 
 const useStyles = makeStyles((theme) => {
@@ -38,20 +38,4 @@ export default function OrderPage() {
   )
 }
 
-// eslint-disable-next-line func-style
-export async function getServerSideProps(ctx) {
-  const session = await getSession(ctx)
-
-  if (!session) {
-    ctx.res.writeHead(302, { Location: '/auth/login' })
-    ctx.res.end()
-
-    return { props: {} }
-  }
-
-  return {
-    props: {
-      user: session.user
-    }
-  }
-}
+export const getServerSideProps = checkAuth()

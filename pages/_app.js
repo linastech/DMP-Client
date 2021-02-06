@@ -1,12 +1,13 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
-import GlobalStyles from '@components/GlobalStyles'
-import Layout from '../layout'
-import PropTypes from 'prop-types'
-import { Provider } from 'next-auth/client'
 import React from 'react'
-import { ThemeProvider } from '@material-ui/core/styles'
-import theme from '../theme'
-export default function App({ Component, pageProps }) {
+import GlobalStyles from '@components/GlobalStyles'
+import {Provider } from 'next-auth/client'
+import DashboardLayout from '@layouts/Dashboard'
+import PropTypes from 'prop-types'
+import theme from '@theme'
+import {CssBaseline, ThemeProvider } from '@material-ui/core'
+export default function DMPApp({ Component, pageProps }) {
+  const Layout = Component.Layout || DashboardLayout
+
   React.useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side')
@@ -20,11 +21,10 @@ export default function App({ Component, pageProps }) {
     <Provider session={pageProps.session}>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-
         <CssBaseline />
 
         <GlobalStyles />
-
+        
         <Layout>
           <Component {...pageProps} />
         </Layout>
@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }) {
   )
 }
 
-App.propTypes = {
+DMPApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired
 }
