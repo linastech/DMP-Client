@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     margin: 0,
     paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(3),
     padding: 0
   },
 }))

@@ -16,7 +16,7 @@ const items = [
     sku: 'Z148-023000'
   },
   {
-    id: 0,
+    id: 1,
     name: 'Apple iMac 21,5"" Retina 4K 3,6/16/256GB SSD RP555X BTO',
     ean: '4064307171531',
     offer_ean: '4064307151531',
@@ -25,7 +25,7 @@ const items = [
     sku: 'Z148-023000'
   },
   {
-    id: 0,
+    id: 2,
     name: 'BenQ EX2780Q 67cm (27"") WQHD IPS Gaming-Monitor DP/HDMI/USB-C 5ms 144Hz FreeSync',
     ean: '4064307171531',
     offer_ean: '4064307171531',
@@ -36,9 +36,6 @@ const items = [
 ]
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(3)
-  },
   tableRow: {
     '& th, & td': {
       borderRight: `1px solid ${theme.palette.divider}`,

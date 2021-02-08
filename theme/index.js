@@ -9,6 +9,7 @@ const theme = createMuiTheme({
       default: colors.common.white,
       paper: colors.common.white
     },
+    border: "rgba(0, 0, 0, 0.12)",
     primary: {
       main: colors.indigo[500]
     },
