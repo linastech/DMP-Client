@@ -10,6 +10,7 @@ import {
 
 const items = [
   {
+    id: 0,
     supplier: 'AB.pl',
     status: 'DISABLED',
     delivery_period: 3,
@@ -17,6 +18,7 @@ const items = [
     margin: 0
   },
   {
+    id: 1,
     supplier: 'ABC',
     status: 'ACTIVE',
     delivery_period: 3,
@@ -24,6 +26,7 @@ const items = [
     margin: 0
   },
   {
+    id: 2,
     supplier: 'ABESTOCK',
     status: 'DISABLED',
     delivery_period: 3,
@@ -31,6 +34,7 @@ const items = [
     margin: 0
   },
   {
+    id: 3,
     supplier: 'ACC',
     status: 'ACTIVE',
     delivery_period: 3,
@@ -176,7 +180,7 @@ export default function SuppliersList() {
                   </TableCell>
 
                   <TableCell align="center">
-                    <Link href="" passHref>
+                    <Link href={`/catalog/${item.id}/`} passHref>
                       <Button 
                         variant="contained"
                         color="primary"

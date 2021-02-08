@@ -80,6 +80,7 @@ export default function SuppliersList() {
             onChange={handleChange}
             value={values.supplier}
             variant="outlined"
+            required
           />
         </Grid>
 
@@ -129,6 +130,7 @@ export default function SuppliersList() {
             onChange={handleChange}
             value={values.delivery_period}
             variant="outlined"
+            required
           />
         </Grid>
 
@@ -145,6 +147,7 @@ export default function SuppliersList() {
             onChange={handleChange}
             value={values.minimal_items_cost}
             variant="outlined"
+            required
           />
         </Grid>
 
@@ -161,6 +164,7 @@ export default function SuppliersList() {
             onChange={handleChange}
             value={values.margin}
             variant="outlined"
+            required
           />
         </Grid>
       </Grid>

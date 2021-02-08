@@ -71,7 +71,7 @@ export default function EditInfo() {
     setValues({
       ...values,
       [event.target.name]: event.target.value
-    });
+    })
   }
 
 

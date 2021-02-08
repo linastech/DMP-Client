@@ -76,6 +76,7 @@ export default function Toolbar({ className, ...rest }) {
                 onChange={handleChange}
                 required
                 select
+                size="small"
                 value={values.state}
                 variant="outlined"
               >
@@ -102,6 +103,7 @@ export default function Toolbar({ className, ...rest }) {
                 name="state"
                 onChange={handleChange}
                 required
+                size="small"
                 select
                 value={values.state}
                 variant="outlined"
@@ -135,6 +137,7 @@ export default function Toolbar({ className, ...rest }) {
                     </InputAdornment>
                   )
                 }}
+                size="small"
                 fullWidth
                 placeholder="Search EAN"
                 variant="outlined"
