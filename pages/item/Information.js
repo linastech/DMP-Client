@@ -11,7 +11,12 @@ const item = {
   asin: 'B0BDASDDSAVQ',
   manufacturer_code: '1457423',
   manufacturer: '',
-  description: '• Prozessor: 3,6 GHz Quad-Core Intel Core i3 Prozessor • Arbeitsspeicher: 8 GB DDR 4 - 2400 RAM • Speicher: 256 GB SSD • Grafik: Radeon Pro 555X mit 2 GB GDDR5 Grafikspeicher • Display: 21,5 Zoll (54,61 cm) Retina 4K Display mit 4.096 x 2.304 Pixe|'
+  description: '\
+    • Prozessor: 3,6 GHz Quad-Core Intel Core i3 Prozessor <br />\
+    • Arbeitsspeicher: 8 GB DDR 4 - 2400 RAM • Speicher: 256 GB SSD<br />\
+    • Grafik: Radeon Pro 555X mit 2 GB GDDR5 Grafikspeicher<br />\
+    • Display: 21,5 Zoll (54,61 cm) Retina 4K Display mit 4.096 x 2.304 Pixe<br />\
+  '
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -132,13 +137,14 @@ export default function Information(){
         {/* Right col */}
         <Grid
           container
-          justify="space-between"
           md={6}
           xs={12}
+          justify="space-between"
+          alignItems="center"
           className={classes.row}
         >
           <Grid item>Description: </Grid>
-          <Grid item className={classes.fieldValue}>{item.description}</Grid>
+          <Grid item className={classes.fieldValue} dangerouslySetInnerHTML={{__html: item.description}} />
         </Grid>
       </Grid>
     </>

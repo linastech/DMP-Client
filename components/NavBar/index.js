@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react'
+import clsx from 'clsx'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import NavItem from './NavItem'
-import { Avatar, Box, Divider, Drawer, Hidden, List, Typography, makeStyles } from '@material-ui/core'
+import {
+  Avatar, ListItem, Box, Divider, Drawer, Hidden, List, 
+  Typography, Button, makeStyles, Icon, Collapse, ListItemIcon,
+  ListItemText
+} from '@material-ui/core'
+import { StarBorder, ExpandMore, ExpandLess, Description, EventNote } from '@material-ui/icons'
 import { Home, Truck, ShoppingBag } from 'react-feather'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
     width: 256
   },
@@ -17,6 +24,35 @@ const useStyles = makeStyles(() => ({
   avatar: {
     width: 64,
     height: 64
+  },
+  item: {
+    display: 'flex',
+    paddingTop: 0,
+    paddingBottom: 0
+  },
+  button: {
+    color: theme.palette.text.secondary,
+    fontWeight: theme.typography.fontWeightMedium,
+    justifyContent: 'flex-start',
+    letterSpacing: 0,
+    padding: '10px 8px',
+    textTransform: 'none',
+    width: '100%'
+  },
+  icon: {
+    marginRight: theme.spacing(1)
+  },
+  title: {
+    marginRight: 'auto'
+  },
+  active: {
+    color: theme.palette.primary.main,
+    '& $title': {
+      fontWeight: theme.typography.fontWeightMedium
+    },
+    '& $icon': {
+      color: theme.palette.primary.main
+    }
   }
 }))
 
@@ -26,34 +62,20 @@ const user = {
   name: 'Test'
 }
 
-const items = [
-  {
-    href: '/',
-    icon: Home,
-    title: 'Home'
-  },
-  {
-    href: '/amazon',
-    icon: ShoppingBag,
-    title: 'Amazon'
-  },
-  {
-    href: '/suppliers',
-    icon: Truck,
-    title: 'Suppliers'
-  }
-]
-
 export default function NavBar({ onMobileClose, openMobile }) {
   const classes = useStyles()
   const router = useRouter()
+  const [open, setOpen] = React.useState(true)
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose()
     }
-
   }, [router.pathname])
+
+  const handleClick = () => {
+    setOpen(!open)
+  }
 
   const content = (
     <Box
@@ -92,14 +114,68 @@ export default function NavBar({ onMobileClose, openMobile }) {
 
       <Box p={2}>
         <List>
-          {items.map((item) => (
-            <NavItem
-              href={item.href}
-              icon={item.icon}
-              key={item.title}
-              title={item.title}
-            />
-          ))}
+          <ListItem
+            className={clsx(classes.item)}
+            disableGutters
+          >
+            <Link href='/' passHref>
+              <Button className={classes.button}>
+                <Home className={classes.icon} size="20" />
+
+                <span className={classes.title}>Home</span>
+              </Button>
+            </Link>
+          </ListItem>
+
+          <ListItem
+            className={clsx(classes.item)}
+            disableGutters
+          >
+            <Link href='/suppliers' passHref>
+              <Button className={classes.button}>
+                <Truck className={classes.icon} size="20" />
+
+                <span className={classes.title}>Suppliers</span>
+              </Button>
+            </Link>
+          </ListItem>
+
+          <ListItem
+            className={clsx(classes.item)}
+            disableGutters
+            button onClick={handleClick}
+          >
+            <Button className={classes.button}>
+              <ShoppingBag className={classes.icon} size="20" />
+
+              <span className={classes.title}>Amazon</span>
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </Button>
+          </ListItem>
+
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <Link href='/amazon' passHref>
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                    <EventNote />
+                  </ListItemIcon>
+
+                  <ListItemText primary="Orders" />
+                </ListItem>
+              </Link>
+
+              <Link href='/invoices' passHref>
+                <ListItem button className={classes.nested}>
+                  <ListItemIcon>
+                    <Description />
+                  </ListItemIcon>
+
+                  <ListItemText primary="Invoices" />
+                </ListItem>
+              </Link>
+            </List>
+          </Collapse>
         </List>
       </Box>
 
@@ -138,9 +214,9 @@ export default function NavBar({ onMobileClose, openMobile }) {
 NavBar.propTypes = {
   onMobileClose: PropTypes.func,
   openMobile: PropTypes.bool
-}
+};
 
 NavBar.defaultProps = {
   onMobileClose: () => {},
   openMobile: false
-}
+};

@@ -36,18 +36,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Layout({ children }) {
   const classes = useStyles()
-  const [
-    session,
-    loading
-  ] = useSession()
-  const [
-    isMobileNavOpen,
-    setMobileNavOpen
-  ] = useState(false)
+  const [ session, loading ] = useSession()
+  const [ isMobileNavOpen, setMobileNavOpen ] = useState(false)
 
   return (
     <div className={classes.root}>
-      <TopBar />
+      <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} />
 
       { typeof window !== 'undefined' && !loading && session &&
         <NavBar

@@ -1,6 +1,6 @@
 import Page from '@components/Page'
 import checkAuth from '@utils/checkAuth'
-import { Grid, Card, CardHeader, Container, makeStyles, Button, Divider } from '@material-ui/core'
+import { Card, Container, makeStyles } from '@material-ui/core'
 import Information from './Information'
 import Offers from './Offers'
 

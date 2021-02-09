@@ -1,4 +1,5 @@
-import { AppBar, Box, Toolbar, Button, makeStyles } from '@material-ui/core'
+import { AppBar, Box, Toolbar, Button, makeStyles, Hidden, IconButton } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu';
 import Link from 'next/link'
 import Logo from '@components/Logo/Index'
 import PropTypes from 'prop-types'
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function TopBar({ className, ...rest }) {
+export default function TopBar({ className, onMobileNavOpen, ...rest }) {
   const classes = useStyles()
   const [
     session,
@@ -38,14 +39,26 @@ export default function TopBar({ className, ...rest }) {
         <Box flexGrow={1} />
 
         { typeof window !== 'undefined' && !loading && session &&
-          <Link
-            href="/api/auth/signout"
-            passHref
-          >
-            <Button className={classes.logout}>
-              <LogOut />&nbsp;Logout
-            </Button>
-          </Link>}
+          <Hidden mdDown>
+            <Link
+              href="/api/auth/signout"
+              passHref
+            >
+              <Button className={classes.logout}>
+                <LogOut />&nbsp;Logout
+              </Button>
+            </Link>
+          </Hidden>
+        }
+
+          <Hidden lgUp>
+            <IconButton
+              color="inherit"
+              onClick={onMobileNavOpen}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
       </Toolbar>
     </AppBar>
   )
