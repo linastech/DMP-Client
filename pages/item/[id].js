@@ -25,8 +25,6 @@ export default function Item() {
     >
       <Container className={classes.root} maxWidth={false}>
         <Card className={classes.root}>
-
-
           <Information />
         </Card>
       </Container>

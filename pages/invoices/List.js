@@ -3,7 +3,43 @@ import PropTypes from 'prop-types'
 import Link from 'next/link'
 import moment from 'moment'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { Box, Card, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, makeStyles } from '@material-ui/core'
+import { Box, Card, Chip, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, makeStyles } from '@material-ui/core'
+
+const invoices = [
+  {
+    id: 0,
+    order_number: '305-3213-3213123',
+    item: 'Amazfit BIP U Smartwatch pink',
+    ims_status: 'SENT',
+    shipped_date: 1619412824673,
+    supplier: 'ALSO',
+    bill: 'issued',
+    bill_number: '0001407',
+    bill_issue_date: 1649412824673,
+  },
+  {
+    id: 0,
+    order_number: '305-3213-3213123',
+    item: 'Amazfit BIP U Smartwatch pink',
+    ims_status: 'SENT',
+    shipped_date: 1619412824673,
+    supplier: 'ALSO',
+    bill: 'issued',
+    bill_number: '0001407',
+    bill_issue_date: 1649412824673,
+  },
+  {
+    id: 0,
+    order_number: '305-3213-3213123',
+    item: 'Amazfit BIP U Smartwatch pink',
+    ims_status: 'SENT',
+    shipped_date: 1619412824673,
+    supplier: 'ALSO',
+    bill: 'issued',
+    bill_number: '0001407',
+    bill_issue_date: 1649412824673,
+  },
+]
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -12,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   head: {
     background: theme.palette.background.dark,
+    borderTop: `1px solid ${theme.palette.border}`,
     '& th': {
       borderRight: `1px solid ${theme.palette.border}`
     }
@@ -47,15 +84,7 @@ export default function Results({ orders, ...rest }) {
             <TableHead className={classes.head}>
               <TableRow>
                 <TableCell>
-                  Date
-                </TableCell>
-
-                <TableCell>
-                  Order Number
-                </TableCell>
-
-                <TableCell>
-                  Market
+                  Order number
                 </TableCell>
 
                 <TableCell>
@@ -63,11 +92,11 @@ export default function Results({ orders, ...rest }) {
                 </TableCell>
 
                 <TableCell>
-                  Amazon Status
+                  IMS Status
                 </TableCell>
 
                 <TableCell>
-                  DMP Status
+                  Shipped date
                 </TableCell>
 
                 <TableCell>
@@ -75,49 +104,62 @@ export default function Results({ orders, ...rest }) {
                 </TableCell>
 
                 <TableCell>
-                  Ship By
+                  Bill
+                </TableCell>
+
+                <TableCell>
+                  Bill number
+                </TableCell>
+
+                <TableCell>
+                  Date bill issued
                 </TableCell>
               </TableRow>
             </TableHead>
 
             <TableBody className={classes.body}>
-              {orders.slice(0, limit).map((order) => (
-                <TableRow
-                  hover
-                  key={order.id}
-                >
+              {invoices.slice(0, limit).map((invoice) => (
+                <TableRow>
                   <TableCell>
-                    {moment(order.date).format('DD/MM/YYYY')}
-                  </TableCell>
-
-                  <TableCell>
-                    <Link href="/order/1">
-                      {order.orderNumber}
+                    <Link href={`/order/${invoice.id}`}>
+                      <a>{ invoice.order_number }</a>
                     </Link>
                   </TableCell>
 
                   <TableCell>
-                    {order.market}
+                    { invoice.item }
                   </TableCell>
 
                   <TableCell>
-                    {order.item}
+                    <Chip
+                      style={{backgroundColor:'#42e642', color: '#fff'}}
+                      label={ invoice.ims_status }
+                      size="small"
+                    />
                   </TableCell>
 
                   <TableCell>
-                    {order.amazonStatus}
+                    {moment(invoice.shipped_date).format('DD/MM/YYYY')}
                   </TableCell>
 
                   <TableCell>
-                    {order.dmpStatus}
+                    { invoice.supplier }
                   </TableCell>
 
                   <TableCell>
-                    {order.supplier}
+                    <Chip
+                      style={{backgroundColor:'#42e642', color: '#fff'}}
+                      label={ invoice.bill }
+                      size="small"
+                    />
                   </TableCell>
 
                   <TableCell>
-                    {moment(order.shipBy).format('DD/MM/YYYY')}
+                    { invoice.bill_number }
+                  </TableCell>
+
+                  <TableCell>
+                    {moment(invoice.bill_issue_date).format('DD/MM/YYYY')}
                   </TableCell>
                 </TableRow>
               ))}
