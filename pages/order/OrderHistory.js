@@ -9,13 +9,13 @@ import moment from 'moment'
 const useStyles = makeStyles((theme) => {
   return {
     root: {},
-    cell: {
-      borderRight: `1px solid ${theme.palette.divider}`
-    },
-    row: {
-      backgroundColor: '#f8fbff',
-      '&:nth-child(2n)': {
-        backgroundColor: theme.palette.background.default
+    table: {
+      '& td': {
+        borderRight: `1px solid ${theme.palette.divider}`,
+      },
+      '& th': {
+        borderRight: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.dark
       }
     }
   }
@@ -23,14 +23,17 @@ const useStyles = makeStyles((theme) => {
 
 const history = [
   {
+    id: '0',
     date: 1555016400000,
     content: 'Order information received from Amazon'
   },
   {
+    id: '1',
     date: 1556016400000,
     content: 'Order information updated'
   },
   {
+    id: '2',
     date: 1555716400000,
     content: 'Order information updated'
   },
@@ -67,7 +70,7 @@ export default function OrderHistory() {
 
             <TableBody>
               {history.map((record) => (
-                <TableRow className={classes.row}>
+                <TableRow key={record.id} className={classes.row}>
                   <TableCell className={classes.cell}>
                     {moment(record.date).format('DD/MM/YYYY')}
                   </TableCell>

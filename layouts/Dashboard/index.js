@@ -41,7 +41,10 @@ export default function Layout({ children }) {
 
   return (
     <div className={classes.root}>
-      <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} />
+      <TopBar
+        onMobileNavOpen={() => setMobileNavOpen(true)}
+        menu={true}
+      />
 
       { typeof window !== 'undefined' && !loading && session &&
         <NavBar

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { Search as SearchIcon, CheckCircle, MinusCircle } from 'react-feather'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { 
   Container,
   Box, makeStyles, Grid, Card, TableHead, Table, Typography, TablePagination, SvgIcon,

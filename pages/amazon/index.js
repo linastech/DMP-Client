@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Container, makeStyles, Box, Typography } from '@material-ui/core'
+import { Container, makeStyles, Box, Typography, CircularProgress } from '@material-ui/core'
 import Page from '@components/Page'
 import Results from './Results'
 import Toolbar from './Toolbar'
 import Stats from './Stats'
 import useFetch from 'use-http'
 import checkAuth from '@utils/checkAuth'
+import { ErrorMessage, LoadingIndicator } from '@components/ContentState'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(3)
   }
 }))
+
 export default function AmazonOrders() {
   const classes = useStyles()
   const [orders, setTodos] = useState([])
@@ -31,14 +33,11 @@ export default function AmazonOrders() {
 
   useEffect(() => { initializeOrders() }, [])
 
-  // TODO Indicators
-  if (error) {
-    return ('Error!')
-  }
+  if (error)
+    return  <ErrorMessage message="Order list failed to load" />
 
-  if (loading) {
-    return ('Loading...')
-  }
+  if (loading)
+    return  <LoadingIndicator />
 
   return (
     <Page
@@ -58,10 +57,8 @@ export default function AmazonOrders() {
         <Stats />
 
         <Toolbar />
-
-        <Box mt={3}>
-          <Results orders={orders} />
-        </Box>
+        
+        <Results orders={orders} />
       </Container>
     </Page>
   )

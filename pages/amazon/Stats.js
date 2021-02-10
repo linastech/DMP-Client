@@ -20,8 +20,8 @@ export default function Stats() {
       >
         <Grid
           item
+          xs={6}
           md={3}
-          xs={12}
         >
           <Typography variant="h3">10</Typography>
 
@@ -30,8 +30,8 @@ export default function Stats() {
 
         <Grid
           item
+          xs={6}
           md={3}
-          xs={12}
         >
           <Typography variant="h3">8</Typography>
 
@@ -40,8 +40,8 @@ export default function Stats() {
 
         <Grid
           item
+          xs={6}
           md={3}
-          xs={12}
         >
           <Typography variant="h3">31</Typography>
 
@@ -50,8 +50,8 @@ export default function Stats() {
 
         <Grid
           item
+          xs={6}
           md={3}
-          xs={12}
         >
           <Typography variant="h3">23</Typography>
 

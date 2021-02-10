@@ -3,9 +3,8 @@ import clsx from 'clsx'
 import moment from 'moment'
 import {
   Container, Card, Chip, CardHeader, makeStyles, Divider, Box,
-  Table, TableHead, TableRow, TableCell, TableBody, TablePagination
+  Table, TableHead, TableRow, TableCell, TableBody, TablePagination, TableContainer
 } from '@material-ui/core'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,9 +14,6 @@ const useStyles = makeStyles((theme) => ({
     '& th, & td': {
       borderRight: `1px solid ${theme.palette.divider}`,
     },
-    '& th:last-child': {
-      borderRight: '0 !important'
-    }
   },
   header: {
     backgroundColor: theme.palette.background.dark
@@ -74,77 +70,75 @@ export default function Information(){
 
         <Divider />
 
-        <PerfectScrollbar>
-          <Box minWidth={1050}>
-            <Table>
-              <TableHead>
-                <TableRow className={clsx(classes.tableRow, classes.header)}>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow className={clsx(classes.tableRow, classes.header)}>
+                <TableCell>
+                  Supplier
+                </TableCell>
+
+                <TableCell>
+                  Price
+                </TableCell>
+
+                <TableCell>
+                  Amount
+                </TableCell>
+
+                <TableCell>
+                  Delivery information
+                </TableCell>
+
+                <TableCell>
+                  Last updated
+                </TableCell>
+
+                <TableCell>
+                  Offer valid until
+                </TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {suppliers.slice(0, limit).map((supplier) => (
+                <TableRow
+                  className={classes.tableRow}
+                  hover
+                  key={supplier.id}
+                >
                   <TableCell>
-                    Supplier
+                    { supplier.name }
                   </TableCell>
 
                   <TableCell>
-                    Price
+                    { supplier.price } EUR (no PVM)
                   </TableCell>
 
                   <TableCell>
-                    Amount
+                    <Chip
+                      style={{backgroundColor:'#42e642', color: '#fff'}}
+                      label={ supplier.amount }
+                      size="small"
+                    />
                   </TableCell>
 
                   <TableCell>
-                    Delivery information
+                    { supplier.delivery_info }
                   </TableCell>
 
                   <TableCell>
-                    Last updated
+                    {moment(supplier.last_updated).format('DD/MM/YYYY')}
                   </TableCell>
 
                   <TableCell>
-                    Offer valid until
+                    {moment(supplier.offer_vaild_until).format('DD/MM/YYYY')}
                   </TableCell>
                 </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {suppliers.slice(0, limit).map((supplier) => (
-                  <TableRow
-                    className={classes.tableRow}
-                    hover
-                    key={supplier.id}
-                  >
-                    <TableCell>
-                      { supplier.name }
-                    </TableCell>
-
-                    <TableCell>
-                      { supplier.price } EUR (no PVM)
-                    </TableCell>
-
-                    <TableCell>
-                      <Chip
-                        style={{backgroundColor:'#42e642', color: '#fff'}}
-                        label={ supplier.amount }
-                        size="small"
-                      />
-                    </TableCell>
-
-                    <TableCell>
-                      { supplier.delivery_info }
-                    </TableCell>
-
-                    <TableCell>
-                      {moment(supplier.last_updated).format('DD/MM/YYYY')}
-                    </TableCell>
-
-                    <TableCell>
-                      {moment(supplier.offer_vaild_until).format('DD/MM/YYYY')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Box>
-        </PerfectScrollbar>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
         <TablePagination
           component="div"

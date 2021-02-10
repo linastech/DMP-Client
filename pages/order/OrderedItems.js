@@ -4,13 +4,21 @@ import {
   Container, makeStyles, Grid, Card, TextField,  InputAdornment, SvgIcon, Box, Chip, TableHead, Table, Typography,
   CardHeader, Divider, TableContainer, TableBody, TableRow, TableCell, Button, TablePagination
 } from '@material-ui/core'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { Search as SearchIcon } from 'react-feather'
 
 const useStyles = makeStyles((theme) => {
   return {
     root: {
       marginBottom: theme.spacing(3)
+    },
+    table: {
+      '& td': {
+        borderRight: `1px solid ${theme.palette.divider}`,
+      },
+      '& th': {
+        borderRight: `1px solid ${theme.palette.divider}`,
+        backgroundColor: theme.palette.background.dark
+      }
     }
   }
 })
@@ -18,28 +26,28 @@ const useStyles = makeStyles((theme) => {
 const items = [
   {
     name: 'Demo name',
-    ean: '231312312312',
+    ean: '23132312312312',
     sku: '3123132131',
     supplier: 'valre.lt',
     amount: 1
   },
   {
     name: 'Demo name 2',
-    ean: '231312312312',
+    ean: '23131231212312',
     sku: '3123132131',
     supplier: 'valre.lt',
     amount: 1
   },
   {
     name: 'Demo name 3',
-    ean: '231312312312',
+    ean: '232211312312312',
     sku: '3123132131',
     supplier: 'valre.lt',
     amount: 1
   },
   {
     name: 'Demo name 4',
-    ean: '231312312312',
+    ean: '231323123412312',
     sku: '3123132131',
     supplier: 'valre.lt',
     amount: 1
@@ -84,6 +92,7 @@ export default function OrderedItems() {
                   fullWidth
                   placeholder="Search"
                   variant="outlined"
+                  size="small"
                 />
               </Grid>
             </Grid>
@@ -92,64 +101,62 @@ export default function OrderedItems() {
 
         <Divider />
 
-        <PerfectScrollbar>
-          <Box minWidth={1050}>
-            <Table>
-              <TableHead>
-                <TableRow>
+        <TableContainer>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  Name
+                </TableCell>
+
+                <TableCell>
+                  EAN
+                </TableCell>
+
+                <TableCell>
+                  SKU
+                </TableCell>
+
+                <TableCell>
+                  Supplier
+                </TableCell>
+
+                <TableCell>
+                  Amount
+                </TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {items.slice(0, limit).map((item) => (
+                <TableRow
+                  hover
+                  key={item.ean}
+                >
                   <TableCell>
-                    Name
+                    {item.name}
                   </TableCell>
 
                   <TableCell>
-                    EAN
+                    {item.ean}
                   </TableCell>
 
                   <TableCell>
-                    SKU
+                    {item.sku}
                   </TableCell>
 
                   <TableCell>
-                    Supplier
+                    {item.supplier}
                   </TableCell>
 
                   <TableCell>
-                    Amount
+                    {item.amount}
                   </TableCell>
                 </TableRow>
-              </TableHead>
-
-              <TableBody>
-                {items.slice(0, limit).map((item) => (
-                  <TableRow
-                    hover
-                    key={item.id}
-                  >
-                    <TableCell>
-                      {item.name}
-                    </TableCell>
-
-                    <TableCell>
-                      {item.ean}
-                    </TableCell>
-
-                    <TableCell>
-                      {item.sku}
-                    </TableCell>
-
-                    <TableCell>
-                      {item.supplier}
-                    </TableCell>
-
-                    <TableCell>
-                      {item.amount}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Box>
-        </PerfectScrollbar>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
 
         <TablePagination
           component="div"

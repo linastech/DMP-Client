@@ -3,13 +3,12 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import NavItem from './NavItem'
 import {
   Avatar, ListItem, Box, Divider, Drawer, Hidden, List, 
   Typography, Button, makeStyles, Icon, Collapse, ListItemIcon,
   ListItemText
 } from '@material-ui/core'
-import { StarBorder, ExpandMore, ExpandLess, Description, EventNote } from '@material-ui/icons'
+import { ExpandMore, ExpandLess, Description, EventNote } from '@material-ui/icons'
 import { Home, Truck, ShoppingBag } from 'react-feather'
 
 const useStyles = makeStyles((theme) => ({

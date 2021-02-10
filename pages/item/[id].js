@@ -6,7 +6,7 @@ import Offers from './Offers'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(5)
+    marginTop: theme.spacing(3)
   }
 }))
 

@@ -47,9 +47,9 @@ export default function EditInfo() {
     invoice_number: '',
     additional_comment: '',
     comment: '',
-    complaint_status: null,
+    complaint_status: '',
     refund: '',
-    supplier: null,
+    supplier: '',
     identification: '',
     files: [],
     sold_to: '',
@@ -65,7 +65,7 @@ export default function EditInfo() {
     courier: ''
   })
 
-  const [images, setImages] = useState(false)
+  const [images, setImages] = useState()
 
   const handleChange = (event) => {
     setValues({
@@ -110,151 +110,157 @@ export default function EditInfo() {
           noValidate
         >
           <Card>
-            <CardHeader
-              title={
-                <Grid container spacing={3}>
-                  <Grid item md={6} xs={12}>Shipping information</Grid>
-                  <Grid item md={6} xs={12}>Invoices</Grid>
-                </Grid>
-              }
-            />
-
             <CardContent>
+              <Grid container spacing={3}>
+                {/* Column */}
+                <Grid item xs={12} md={6}>
+                  <Grid container spacing={3}>
+                    {/* Header */}
+                    <Grid item md={12} xs={12}>
+                      <Typography variant="h5">Shipping information</Typography>
+                    </Grid>
+
+                    {/* IMS status */}
+                    <Grid item md={12} xs={12} >
+                      <TextField
+                        fullWidth
+                        label="IMS Status"
+                        name="ims_status"
+                        onChange={handleChange}
+                        select
+                        SelectProps={{ native: true }}
+                        value={values.ims_state}
+                        variant="outlined"
+                      >
+                        {imsStatuses.map((option) => (
+                          <option
+                            key={option.value}
+                            value={option.value}
+                          >
+                            {option.label}
+                          </option>
+                        ))}
+                      </TextField>
+                    </Grid>
+
+                    {/* Supplier */}
+                    <Grid item md={12} xs={12} >
+                      <TextField
+                        fullWidth
+                        label="Supplier"
+                        name="supplier"
+                        onChange={handleChange}
+                        select
+                        SelectProps={{ native: true }}
+                        value={values.supplier}
+                        variant="outlined"
+                      >
+                        <option
+                          key=''
+                          value=''
+                        ></option>
+                        <option
+                          key='chose'
+                          value='chose'
+                        >
+                          Choose
+                        </option>
+                      </TextField>
+                    </Grid>
+
+                    {/* Identification */}
+                    <Grid item md={12} xs={12} >
+                      <TextField
+                        fullWidth
+                        label="Identification"
+                        name="identification"
+                        onChange={handleChange}
+                        value={values.identification}
+                        variant="outlined"
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+
+                {/* Column */}
+                <Grid item xs={12} md={6} >
+                  <Grid container spacing={3}>
+                    {/* Header */}
+                    <Grid item md={12} xs={12}>
+                      <Typography variant="h5">Invoices</Typography>
+                    </Grid>
+
+                    {/* Invoice Status */}
+                    <Grid
+                      item
+                      md={12}
+                      xs={12}
+                    >
+                      <TextField
+                        fullWidth
+                        label="Status"
+                        name="invoice_status"
+                        onChange={handleChange}
+                        select
+                        SelectProps={{ native: true }}
+                        value={values.invoice_state}
+                        variant="outlined"
+                      >
+                        <option
+                          key='NEW'
+                          value='NEW'
+                        >
+                          NEW
+                        </option>
+                        <option
+                          key='ISSUED'
+                          value='ISSUED'
+                        >
+                          ISSUED
+                        </option>
+                      </TextField>
+                    </Grid>
+
+                    {/* Invoice Number */}
+                    <Grid
+                      item
+                      md={12}
+                      xs={12}
+                    >
+                      <TextField
+                        fullWidth
+                        label="Invoice number"
+                        name="invoice_number"
+                        onChange={handleChange}
+                        value={values.invoice_number}
+                        variant="outlined"
+                      />
+                    </Grid>
+
+                    {/* Sold to */}
+                    <Grid
+                      item
+                      md={12}
+                      xs={12}
+                    >
+                      <TextField
+                        fullWidth
+                        label="Sold to"
+                        name="sold_to"
+                        onChange={handleChange}
+                        value={values.sold_to}
+                        variant="outlined"
+                      />
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+
               <Grid
                 container
                 spacing={3}
               >
-                {/* IMS status */}
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    fullWidth
-                    label="IMS Status"
-                    name="ims_status"
-                    onChange={handleChange}
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.ims_state}
-                    variant="outlined"
-                  >
-                    {imsStatuses.map((option) => (
-                      <option
-                        key={option.value}
-                        value={option.value}
-                      >
-                        {option.label}
-                      </option>
-                    ))}
-                  </TextField>
-                </Grid>
-                
-                {/* Invoice Status */}
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    fullWidth
-                    label="Status"
-                    name="invoice_status"
-                    onChange={handleChange}
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.invoice_state}
-                    variant="outlined"
-                  >
-                    <option
-                      key='NEW'
-                      value='NEW'
-                    >
-                      NEW
-                    </option>
-                    <option
-                      key='ISSUED'
-                      value='ISSUED'
-                    >
-                      ISSUED
-                    </option>
-                  </TextField>
-                </Grid>
-                
-                {/* Supplier */}
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    fullWidth
-                    label="Supplier"
-                    name="supplier"
-                    onChange={handleChange}
-                    select
-                    SelectProps={{ native: true }}
-                    value={values.supplier}
-                    variant="outlined"
-                  >
-                    <option
-                      key={null}
-                      value={null}
-                    >
-                      Choose
-                    </option>
-                  </TextField>
-                </Grid>
-
-                {/* Invoice Number */}
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    fullWidth
-                    label="Invoice number"
-                    name="invoice_number"
-                    onChange={handleChange}
-                    value={values.invoice_number}
-                    variant="outlined"
-                  />
-                </Grid>
-
-                {/* Identification */}
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    fullWidth
-                    label="Identification"
-                    name="identification"
-                    onChange={handleChange}
-                    value={values.identification}
-                    variant="outlined"
-                  />
-                </Grid>
-
-                {/* Sold to */}
-                <Grid
-                  item
-                  md={6}
-                  xs={12}
-                >
-                  <TextField
-                    fullWidth
-                    label="Sold to"
-                    name="sold_to"
-                    onChange={handleChange}
-                    value={values.sold_to}
-                    variant="outlined"
-                  />
-                </Grid>
-
                 {/* Photos */}
                 <Grid
                   item
@@ -526,8 +532,12 @@ export default function EditInfo() {
                   variant="outlined"
                 >
                   <option
-                    key={null}
-                    value={null}
+                    key=''
+                    value=''
+                  ></option>
+                  <option
+                    key='chose'
+                    value='chose'
                   >
                     Choose
                   </option>

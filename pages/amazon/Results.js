@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import moment from 'moment'
-import PerfectScrollbar from 'react-perfect-scrollbar'
-import { Box, Card, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, makeStyles } from '@material-ui/core'
+import { Card, TableContainer, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
-  avatar: {
-    marginRight: theme.spacing(2)
+  root: {
+    marginTop: theme.spacing(3)
+  },
+  table: {
+    overflowX: 'auto',
   },
   head: {
     background: theme.palette.background.dark,
@@ -37,94 +38,89 @@ export default function Results({ orders, ...rest }) {
   }
 
   return (
-    <Card
-      className={classes.root}
-      {...rest}
-    >
-      <PerfectScrollbar>
-        <Box minWidth={1050}>
-          <Table>
-            <TableHead className={classes.head}>
-              <TableRow>
+    <Card className={classes.root}>
+      <TableContainer>
+        <Table className={classes.table}>
+          <TableHead className={classes.head}>
+            <TableRow>
+              <TableCell>
+                Date
+              </TableCell>
+
+              <TableCell>
+                Order Number
+              </TableCell>
+
+              <TableCell>
+                Market
+              </TableCell>
+
+              <TableCell>
+                Item
+              </TableCell>
+
+              <TableCell>
+                Amazon Status
+              </TableCell>
+
+              <TableCell>
+                DMP Status
+              </TableCell>
+
+              <TableCell>
+                Supplier
+              </TableCell>
+
+              <TableCell>
+                Ship By
+              </TableCell>
+            </TableRow>
+          </TableHead>
+
+          <TableBody className={classes.body}>
+            {orders.slice(0, limit).map((order) => (
+              <TableRow
+                hover
+                key={order.id}
+              >
                 <TableCell>
-                  Date
+                  {moment(order.date).format('DD/MM/YYYY')}
                 </TableCell>
 
                 <TableCell>
-                  Order Number
+                  <Link href="/order/1">
+                    {order.orderNumber}
+                  </Link>
                 </TableCell>
 
                 <TableCell>
-                  Market
+                  {order.market}
                 </TableCell>
 
                 <TableCell>
-                  Item
+                  {order.item}
                 </TableCell>
 
                 <TableCell>
-                  Amazon Status
+                  {order.amazonStatus}
                 </TableCell>
 
                 <TableCell>
-                  DMP Status
+                  {order.dmpStatus}
                 </TableCell>
 
                 <TableCell>
-                  Supplier
+                  {order.supplier}
                 </TableCell>
 
                 <TableCell>
-                  Ship By
+                  {moment(order.shipBy).format('DD/MM/YYYY')}
                 </TableCell>
               </TableRow>
-            </TableHead>
-
-            <TableBody className={classes.body}>
-              {orders.slice(0, limit).map((order) => (
-                <TableRow
-                  hover
-                  key={order.id}
-                >
-                  <TableCell>
-                    {moment(order.date).format('DD/MM/YYYY')}
-                  </TableCell>
-
-                  <TableCell>
-                    <Link href="/order/1">
-                      {order.orderNumber}
-                    </Link>
-                  </TableCell>
-
-                  <TableCell>
-                    {order.market}
-                  </TableCell>
-
-                  <TableCell>
-                    {order.item}
-                  </TableCell>
-
-                  <TableCell>
-                    {order.amazonStatus}
-                  </TableCell>
-
-                  <TableCell>
-                    {order.dmpStatus}
-                  </TableCell>
-
-                  <TableCell>
-                    {order.supplier}
-                  </TableCell>
-
-                  <TableCell>
-                    {moment(order.shipBy).format('DD/MM/YYYY')}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <TablePagination
         component="div"

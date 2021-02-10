@@ -1,57 +1,41 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { 
-  Container, makeStyles, Grid, Card, Chip, TableHead, Table, Typography,
-  CardHeader, Divider, TableContainer, TableBody, TableRow, TableCell, Button
+  Container, makeStyles, Grid, Card, Chip,
+  CardHeader, Divider, Button, Typography
 } from '@material-ui/core'
 import ReactCountryFlag from "react-country-flag"
 import { ArrowLeftCircle } from 'react-feather'
 
-
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      backgroundColor: theme.palette.background.dark,
-      minHeight: '100%',
       paddingBottom: theme.spacing(3),
-      paddingTop: theme.spacing(3)
+    },
+    container: {
+      borderTop: `1px solid ${theme.palette.divider}`,
+    },
+    column: {
+      '& > div': {
+        padding: theme.spacing(2),
+        borderRight: `1px solid ${theme.palette.divider}`,
+        borderBottom: `1px solid ${theme.palette.divider}`,
+        '&:nth-child(2n)': {
+          backgroundColor: theme.palette.background.dark
+        }
+      }
+    },
+    chip: {
+      height: '19px',
     },
     infoCell: {
       borderRight: `1px solid ${theme.palette.divider}`
     },
     infoCol: {
       fontWeight: 'bold'
-    },
-    infoRow: {
-      backgroundColor: theme.palette.background.dark,
-      '&:nth-child(2n)': {
-        backgroundColor: theme.palette.background.default
-      }
     }
   }
 })
-
-const OrderInfoRow = ({ColOne, ColTwo, ColThree, ColFour}) => {
-  const classes = useStyles()
-
-  return (
-    <TableRow className={classes.infoRow}>
-      <TableCell className={classes.infoCell}>
-        <Grid container justify="space-between">
-          <Grid item>{ColOne}</Grid>
-          <Grid item className={classes.infoCol}>{ColTwo}</Grid>
-        </Grid>
-      </TableCell>
-
-      <TableCell>
-        <Grid container justify="space-between">
-          <Grid item>{ColThree}</Grid>
-          <Grid item className={classes.infoCol}>{ColFour}</Grid>
-        </Grid>
-      </TableCell>
-    </TableRow>
-  )
-}
 
 export default function OrderInfo() {
   const classes = useStyles()
@@ -77,82 +61,99 @@ export default function OrderInfo() {
           }
         />
 
-        <Divider />
 
-        <TableContainer>
-          <Table className={classes.table} aria-label="Order Info">
-            <TableHead>
-              <TableRow>
-                <TableCell>Order Information</TableCell>
+        <Grid container className={classes.container}>
+          <Grid item xs={12} md={6} className={classes.column}>
+            <Grid item>
+              <Typography variant="h6" className={classes.header}>Order information</Typography>
+            </Grid>
 
-                <TableCell>Customer Information</TableCell>
-              </TableRow>
-            </TableHead>
+            <Grid container justify="space-between">
+              <Grid item>Order Number</Grid>
+              <Grid item className={classes.infoCol}>234-4324-43</Grid>
+            </Grid>
 
-            <TableBody>
-              <OrderInfoRow
-                ColOne="Order Number"
-                ColTwo="234-4324-43"
-                ColThree="Name and adress"
-                ColFour="Not specified"
-              />
+            <Grid container justify="space-between">
+              <Grid item>Order date</Grid>
+              <Grid item className={classes.infoCol}>2021-01-05 09:00:28</Grid>
+            </Grid>
 
-              <OrderInfoRow
-                ColOne="Order date"
-                ColTwo="2021-01-05 09:00:28"
-                ColThree="Phone"
-                ColFour="Not specified"
-              />
+            <Grid container justify="space-between">
+              <Grid item>Market</Grid>
+              <Grid item className={classes.infoCol}>
+                <span>
+                  <ReactCountryFlag countryCode="LT" svg />
+                  &nbsp;Lithuania
+                </span>
+              </Grid>
+            </Grid>
 
+            <Grid container justify="space-between">
+              <Grid item>Ship By</Grid>
+              <Grid item className={classes.infoCol}>2021-01-19 09:00:28</Grid>
+            </Grid>
 
-              <OrderInfoRow
-                ColOne="Market"
-                ColTwo={
-                  <span>
-                    <ReactCountryFlag countryCode="LT" svg />
-                    &nbsp;Lithuania
-                  </span>
-                }
-                ColThree="City"
-                ColFour="Kaunas"
-              />
+            <Grid container justify="space-between">
+              <Grid item>DMP Status</Grid>
+              <Grid item className={classes.infoCol}>
+                <Chip
+                  style={{backgroundColor:'#42e642', color: '#fff'}}
+                  label="New"
+                  size="small"
+                  className={classes.chip}
+                />
+              </Grid>
+            </Grid>
 
+            <Grid container justify="space-between">
+              <Grid item>Amazon Status</Grid>
+              <Grid item className={classes.infoCol}>
+                <Chip
+                  style={{backgroundColor:'#4247e6', color: '#fff'}}
+                  label="Unshipped"
+                  size="small"
+                  className={classes.chip}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
 
-              <OrderInfoRow
-                ColOne="Ship By"
-                ColTwo="2021-01-19 09:00:28"
-                ColThree="Post Code"
-                ColFour="LV 3284"
-              />
+          <Grid item xs={12} md={6} className={classes.column}>
+            <Grid item>
+              <Typography variant="h6" className={classes.header}>Customer information</Typography>
+            </Grid>
 
-              <OrderInfoRow
-                ColOne="DMP Status"
-                ColTwo={
-                  <Chip
-                    style={{backgroundColor:'#42e642', color: '#fff'}}
-                    label="New"
-                    size="small"
-                  />
-                }
-                ColThree="Country Code"
-                ColFour="LTU"
-              />
+            <Grid container justify="space-between">
+              <Grid item>Name and adres</Grid>
+              <Grid item className={classes.infoCol}>Not specified</Grid>
+            </Grid>
 
-              <OrderInfoRow
-                ColOne="Amazon Status"
-                ColTwo={
-                  <Chip
-                    style={{backgroundColor:'#4247e6', color: '#fff'}}
-                    label="Unshipped"
-                    size="small"
-                  />
-                }
-                ColThree="PVM Code"
-                ColFour="DE113851928"
-              />
-            </TableBody>
-          </Table>
-        </TableContainer>
+            <Grid container justify="space-between">
+              <Grid item>Phone</Grid>
+              <Grid item className={classes.infoCol}>Not specified</Grid>
+            </Grid>
+
+            <Grid container justify="space-between">
+              <Grid item>City</Grid>
+              <Grid item className={classes.infoCol}>Kaunas</Grid>
+            </Grid>
+
+            <Grid container justify="space-between">
+              <Grid item>Post Code</Grid>
+              <Grid item className={classes.infoCol}>LV 3284</Grid>
+            </Grid>
+
+            <Grid container justify="space-between">
+              <Grid item>Country Code</Grid>
+              <Grid item className={classes.infoCol}>LTU</Grid>
+            </Grid>
+
+            <Grid container justify="space-between">
+              <Grid item>PVM Code</Grid>
+              <Grid item className={classes.infoCol}>DE113851928</Grid>
+            </Grid>
+          </Grid>
+        </Grid>
       </Card>
     </Container>
   )

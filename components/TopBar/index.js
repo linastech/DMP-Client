@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function TopBar({ className, onMobileNavOpen, ...rest }) {
+export default function TopBar({ menu, className, onMobileNavOpen, ...rest }) {
   const classes = useStyles()
   const [
     session,
@@ -51,6 +51,7 @@ export default function TopBar({ className, onMobileNavOpen, ...rest }) {
           </Hidden>
         }
 
+        {menu &&
           <Hidden lgUp>
             <IconButton
               color="inherit"
@@ -59,6 +60,7 @@ export default function TopBar({ className, onMobileNavOpen, ...rest }) {
               <MenuIcon />
             </IconButton>
           </Hidden>
+        }
       </Toolbar>
     </AppBar>
   )

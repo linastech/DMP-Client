@@ -42,7 +42,7 @@ export default function Layout({ children }) {
 
   return (
     <div className={classes.root}>
-      <TopBar />
+      <TopBar menu={false} />
 
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>

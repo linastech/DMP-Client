@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { Search as SearchIcon, CheckCircle, MinusCircle } from 'react-feather'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { 
-  Box, makeStyles, Grid, Card, TableHead, Table, Typography, TablePagination, SvgIcon,
-  CardHeader, Divider, TableBody, TableRow, TableCell, Button, TextField, InputAdornment
+  makeStyles, Grid, Card, TableHead, Table, TablePagination, SvgIcon,
+  CardHeader, Divider, TableBody, TableRow, TableCell, Button, TextField, InputAdornment, TableContainer
 } from '@material-ui/core'
 
 const items = [
@@ -51,9 +50,6 @@ const useStyles = makeStyles((theme) => ({
     '& th, & td': {
       borderRight: `1px solid ${theme.palette.divider}`,
     },
-    '& th:last-child': {
-      borderRight: '0 !important'
-    }
   },
   header: {
     backgroundColor: theme.palette.background.dark
@@ -116,86 +112,84 @@ export default function SuppliersList() {
 
       <Divider />
 
-      <PerfectScrollbar>
-        <Box minWidth={1050}>
-          <Table>
-            <TableHead>
-              <TableRow className={clsx(classes.tableRow, classes.header)}>
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow className={clsx(classes.tableRow, classes.header)}>
+              <TableCell>
+                Supplier
+              </TableCell>
+
+              <TableCell>
+                Status
+              </TableCell>
+
+              <TableCell>
+                Delivery period
+              </TableCell>
+
+              <TableCell>
+                Minimal cost of items
+              </TableCell>
+
+              <TableCell>
+                Margin
+              </TableCell>
+
+              <TableCell className={classes.catalogCol}>
+                &nbsp;
+              </TableCell>
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {items.slice(0, limit).map((item) => (
+              <TableRow
+                className={classes.tableRow}
+                hover
+                key={item.id}
+              >
                 <TableCell>
-                  Supplier
+                  {item.supplier}
+                </TableCell>
+
+                <TableCell align="center">
+                  {item.status === 'ACTIVE' && 
+                    <CheckCircle className={classes.statusChecked} />
+                  }
+                  {item.status === 'DISABLED' && 
+                    <MinusCircle className={classes.statusUnchecked} />
+                  }
                 </TableCell>
 
                 <TableCell>
-                  Status
+                  {item.delivery_period} d.
                 </TableCell>
 
                 <TableCell>
-                  Delivery period
+                  {item.minimal_items_cost} &euro;
                 </TableCell>
 
                 <TableCell>
-                  Minimal cost of items
+                  {item.margin} %
                 </TableCell>
 
-                <TableCell>
-                  Margin
-                </TableCell>
-
-                <TableCell className={classes.catalogCol}>
-                  &nbsp;
+                <TableCell align="center">
+                  <Link href={`/catalog/${item.id}/`} passHref>
+                    <Button 
+                      variant="contained"
+                      color="primary"
+                      size="small"
+                    >
+                      Catalog
+                    </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {items.slice(0, limit).map((item) => (
-                <TableRow
-                  className={classes.tableRow}
-                  hover
-                  key={item.id}
-                >
-                  <TableCell>
-                    {item.supplier}
-                  </TableCell>
-
-                  <TableCell align="center">
-                    {item.status === 'ACTIVE' && 
-                      <CheckCircle className={classes.statusChecked} />
-                    }
-                    {item.status === 'DISABLED' && 
-                      <MinusCircle className={classes.statusUnchecked} />
-                    }
-                  </TableCell>
-
-                  <TableCell>
-                    {item.delivery_period} d.
-                  </TableCell>
-
-                  <TableCell>
-                    {item.minimal_items_cost} &euro;
-                  </TableCell>
-
-                  <TableCell>
-                    {item.margin} %
-                  </TableCell>
-
-                  <TableCell align="center">
-                    <Link href={`/catalog/${item.id}/`} passHref>
-                      <Button 
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                      >
-                        Catalog
-                      </Button>
-                    </Link>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <TablePagination
         component="div"

@@ -29,11 +29,9 @@ export default function AmazonOrders() {
 
           <Divider />
 
-          <CardContent>
             <Information />
 
             <List />
-          </CardContent>
         </Card>
       </Container>
     </Page>

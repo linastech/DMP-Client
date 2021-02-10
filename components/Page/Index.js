@@ -8,7 +8,6 @@ const Page = forwardRef(({
   ...rest
 }, ref) => (
   <div
-    displayName="Page"
     ref={ref}
     {...rest}
   >
